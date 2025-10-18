@@ -1,11 +1,7 @@
-{% doc %}
-  @prompt
-    a list of payment providers icons
-{% enddoc %}
-{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign block_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-payment-icons-{{ ai_gen_id }} {
+  .payment-icons-{{ block_id }} {
     padding: {{ block.settings.padding_top }}px {{ block.settings.padding_horizontal }}px {{ block.settings.padding_bottom }}px;
     background-color: {{ block.settings.background_color }};
     /* text-align is moved to the heading for flex container */
@@ -13,7 +9,7 @@
     --scroll-speed: 20s; /* Adjust scroll speed as needed */
   }
 
-  .ai-payment-icons-container-{{ ai_gen_id }} {
+  .payment-icons-container-{{ block_id }} {
     display: flex;
     /* flex-wrap: wrap; */ /* Remove flex-wrap for carousel */
     /* gap: {{ block.settings.icon_spacing }}px; */ /* Gap will be handled by margin-right on icons */
@@ -27,15 +23,15 @@
     {% endif %} */
     align-items: center;
     white-space: nowrap; /* Keep all items on a single line */
-    animation: scroll-left-{{ ai_gen_id }} var(--scroll-speed) linear infinite;
+    animation: scroll-left-{{ block_id }} var(--scroll-speed) linear infinite;
     will-change: transform; /* Optimize for animation performance */
   }
 
-  .ai-payment-icons-container-{{ ai_gen_id }}:hover {
+  .payment-icons-container-{{ block_id }}:hover {
     animation-play-state: paused; /* Pause animation on hover */
   }
 
-  .ai-payment-icon-{{ ai_gen_id }} {
+  .payment-icon-{{ block_id }} {
     width: {{ block.settings.icon_width }}px;
     height: {{ block.settings.icon_height }}px;
     display: flex;
@@ -51,106 +47,95 @@
     flex-shrink: 0; /* Prevent icons from shrinking */
   }
 
-  .ai-payment-icon-{{ ai_gen_id }} img {
+  .payment-icon-{{ block_id }} img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     fill: {{ block.settings.icon_color }};
   }
 
-  .ai-payment-heading-{{ ai_gen_id }} {
-    margin: 0 0 {{ block.settings.heading_spacing }}px;
-    color: {{ block.settings.heading_color }};
-    font-size: {{ block.settings.heading_size }}px;
-    text-align: {{ block.settings.alignment }}; /* Keep text alignment for heading */
-  }
-
   @media screen and (max-width: 749px) {
-    .ai-payment-icons-{{ ai_gen_id }} {
+    .payment-icons-{{ block_id }} {
       padding: {{ block.settings.padding_top | times: 0.7 }}px {{ block.settings.padding_horizontal | times: 0.7 }}px {{ block.settings.padding_bottom | times: 0.7 }}px;
     }
 
-    .ai-payment-icon-{{ ai_gen_id }} {
+    .payment-icon-{{ block_id }} {
       width: {{ block.settings.icon_width | times: 0.8 }}px;
       height: {{ block.settings.icon_height | times: 0.8 }}px;
       margin-right: {{ block.settings.icon_spacing | times: 0.8 }}px; /* Adjust spacing for mobile */
     }
-
-    .ai-payment-heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
-    }
   }
 
-  @keyframes scroll-left-{{ ai_gen_id }} {
+  @keyframes scroll-left-{{ block_id }} {
     from {
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%); /* Translate by 50% to loop the duplicated content */
+      transform: translateX(-100%); /* Translate by 50% to loop the duplicated content */
     }
   }
 {% endstyle %}
 
-<div class="ai-payment-icons-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+<div class="payment-icons-{{ block_id }}" {{ block.shopify_attributes }}>
   {% if block.settings.heading != blank %}
-    <h3 class="ai-payment-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h3>
+    <h3 class="payment-heading-{{ block_id }}">{{ block.settings.heading }}</h3>
   {% endif %}
 
-  <div class="ai-payment-icons-container-{{ ai_gen_id }}">
+  <div class="payment-icons-container-{{ block_id }}">
     {% if block.settings.show_amex %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'amex.svg' | asset_url }}" alt="American Express">
       </div>
     {% endif %}
 
     {% if block.settings.show_apple_pay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'apple_pay.svg' | asset_url }}" alt="Apple Pay">
       </div>
     {% endif %}
 
     {% if block.settings.show_paypal %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'paypal.svg' | asset_url }}" alt="PayPal">
       </div>
     {% endif %}
 
     {% if block.settings.show_google_pay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'google_pay.svg' | asset_url }}" alt="Google Pay">
       </div>
     {% endif %}
 
     {% if block.settings.show_mastercard %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'mastercard.svg' | asset_url }}" alt="Mastercard">
       </div>
     {% endif %}
 
     {% if block.settings.show_visa %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'visa.svg' | asset_url }}" alt="Visa">
       </div>
     {% endif %}
 
-    <div class="ai-payment-icon-{{ ai_gen_id }}">
+    <div class="payment-icon-{{ block_id }}">
       <img src="{{ 'mercado_pago.svg' | asset_url }}" alt="Visa">
     </div>
 
     {% if block.settings.show_shopify_pay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'shop_pay.svg' | asset_url }}" alt="klarna">
       </div>
     {% endif %}
 
     {% if block.settings.show_klarna %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'klarna.svg' | asset_url }}" alt="klarna">
       </div>
     {% endif %}
 
     {% if block.settings.show_afterpay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'afterpay.svg' | asset_url }}" alt="afterpay">
       </div>
     {% endif %}
@@ -158,65 +143,65 @@
     {% comment %} Duplicated set of icons for seamless looping {% endcomment %}
 
     {% if block.settings.show_amex %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'amex.svg' | asset_url }}" alt="American Express">
       </div>
     {% endif %}
 
     {% if block.settings.show_apple_pay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'apple_pay.svg' | asset_url }}" alt="Apple Pay">
       </div>
     {% endif %}
 
     {% if block.settings.show_paypal %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'paypal.svg' | asset_url }}" alt="PayPal">
       </div>
     {% endif %}
 
     {% if block.settings.show_discover %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'discover.svg' | asset_url }}" alt="Discover">
       </div>
     {% endif %}
 
     {% if block.settings.show_google_pay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'google_pay.svg' | asset_url }}" alt="Google Pay">
       </div>
     {% endif %}
 
     {% if block.settings.show_mastercard %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'mastercard.svg' | asset_url }}" alt="Mastercard">
       </div>
     {% endif %}
 
     {% if block.settings.show_visa %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'visa.svg' | asset_url }}" alt="Visa">
       </div>
     {% endif %}
 
-    <div class="ai-payment-icon-{{ ai_gen_id }}">
+    <div class="payment-icon-{{ block_id }}">
       <img src="{{ 'mercado_pago.svg' | asset_url }}" alt="Visa">
     </div>
 
     {% if block.settings.show_shopify_pay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'shop_pay.svg' | asset_url }}" alt="klarna">
       </div>
     {% endif %}
 
     {% if block.settings.show_klarna %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'klarna.svg' | asset_url }}" alt="klarna">
       </div>
     {% endif %}
 
     {% if block.settings.show_afterpay %}
-      <div class="ai-payment-icon-{{ ai_gen_id }}">
+      <div class="payment-icon-{{ block_id }}">
         <img src="{{ 'afterpay.svg' | asset_url }}" alt="afterpay">
       </div>
     {% endif %}

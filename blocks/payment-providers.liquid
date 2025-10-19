@@ -6,7 +6,7 @@
     background-color: {{ block.settings.background_color }};
     /* text-align is moved to the heading for flex container */
     overflow: hidden; /* Hide overflowing content for the carousel */
-    --scroll-speed: 20s; /* Adjust scroll speed as needed */
+    --scroll-speed: 60s; /* Adjust scroll speed as needed */
   }
 
   .payment-icons-container-{{ block_id }} {
@@ -23,7 +23,7 @@
     {% endif %} */
     align-items: center;
     white-space: nowrap; /* Keep all items on a single line */
-    animation: scroll-left-{{ block_id }} var(--scroll-speed) linear infinite;
+    animation: scroll-left-{{ block_id }} var(--scroll-speed) ease-out infinite;
     will-change: transform; /* Optimize for animation performance */
   }
 
@@ -68,21 +68,18 @@
 
   @keyframes scroll-left-{{ block_id }} {
     from {
-      transform: translateX(0);
+      transform: translateX(0); /* Start from full width plus spacing */
+    }
+    50% {
+      transform: translateX(-167%); /* Translate by 50% to loop the duplicated content */
     }
     to {
-      transform: translateX(-100%); /* Translate by 50% to loop the duplicated content */
+      transform: translateX(0); /* Return to start */
     }
   }
 {% endstyle %}
 
 <div class="payment-icons-{{ block_id }}" {{ block.shopify_attributes }}>
-  {% comment %}
-    {% if block.settings.heading != blank %}
-      <h3 class="payment-heading-{{ block_id }}">{{ block.settings.heading }}</h3>
-    {% endif %}
-  {% endcomment %}
-
   <div class="payment-icons-container-{{ block_id }}">
     {% if block.settings.show_amex %}
       <div class="payment-icon-{{ block_id }}">

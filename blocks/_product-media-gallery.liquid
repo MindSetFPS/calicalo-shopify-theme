@@ -1,5 +1,3 @@
-
-
 {% assign block_settings = block.settings %}
 
 {%- if block_settings.zoom -%}
@@ -193,6 +191,8 @@
     /* Clear gallery aspect ratio for zoom dialog - let media display at natural aspect ratios */
     .dialog-zoomed-gallery .product-media {
       --gallery-aspect-ratio: var(--ratio);
+      margin-left: auto;
+      margin-right: auto;
     }
   {% endunless %}
 
@@ -689,6 +689,18 @@
   .dialog-zoomed-gallery .product-media-container--model .product-media__image {
     /* Make the height match the height of the model-viewer */
     height: 100vh;
+  }
+
+  @media screen and (min-width: 750px) {
+    .dialog-zoomed-gallery .product-media-container--image .product-media {
+      height: 100vh;
+    }
+
+    .dialog-zoomed-gallery .product-media-container--image .product-media__image {
+      object-fit: contain;
+      height: 100%;
+      width: 100%;
+    }
   }
 {% endstylesheet %}
 

@@ -385,7 +385,7 @@
       {% for media in sorted_media %}
         <li
           ref="media[]"
-          class="{{ product_media_container_class }} product-media-container--{{ media.media_type }}{% if forloop.index > 1 %} desktop:hidden{% endif %}"
+          class="{{ product_media_container_class }} product-media-container--{{ media.media_type }}"
           style="{% if block_settings.aspect_ratio == 'adapt' %} --media-preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};{% endif %}"
           {% if settings.transition_to_main_product and forloop.first %}
             data-view-transition-type="product-image-transition"

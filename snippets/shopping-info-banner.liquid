@@ -1,0 +1,39 @@
+<div class="info-block-container">
+  <img class="info-img" src="{{ 'shield_check.svg' | asset_url }}" alt="icono">
+
+  <img
+    class=""
+    style="width: auto; height: 28px;"
+    src="{{ 'truck.svg' | asset_url }}"
+    alt="icono"
+  >
+  <img class="info-img" src="{{ 'flag-mexico.svg' | asset_url }}" alt="icono">
+  <img src="{{ 'mercado_pago.svg' | asset_url }}" alt="icono">
+  <img class="info-img" src="{{ 'paypal-2.svg' | asset_url }}" alt="icono">
+
+  <div class="caption">6 meses</div>
+  <div class="caption">envio de 3 a 10 dias habiles</div>
+  <div class="caption">envios a todo mexico</div>
+</div>
+
+<style>
+  .info-block-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    margin-top: 8px;
+    color: #555;
+    width: 100%;
+    justify-items: center;
+  }
+
+  .info-img {
+    width: auto;
+    height: 35px;
+  }
+
+  .caption {
+    font-size: 10px;
+    text-align: center;
+  }
+</style>

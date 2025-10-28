@@ -277,10 +277,13 @@
     {% for media in sorted_media offset: 1 limit: 3 %}
       <div
         class="thumbnail-item"
-        style="border: 1px solid #eee; overflow: hidden;"
         on:click="#zoom-dialog-{{ block.id }}/open/{{ forloop.index }}"
       >
-        {%- render 'product-media', media: media, sizes: '100px', is_main_product_media: false -%}
+        <div
+          style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;"
+        >
+          {%- render 'product-media', media: media, sizes: '100px', is_main_product_media: false -%}
+        </div>
       </div>
     {% endfor %}
   </div>
@@ -706,11 +709,13 @@
   }
 
   .thumbnail-item {
-    cursor: pointer;
+    cursor: zoom-in;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     object-fit: contain;
     object-position: center;
+    border: 1px solid #eee;
+    display: flex;
   }
 
   .thumbnail-item:hover {
@@ -721,7 +726,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100px;
+    width: 75px;
   }
 
   @media screen and (max-width: 749px) {

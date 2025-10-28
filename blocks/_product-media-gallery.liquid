@@ -273,16 +273,11 @@
 %}
 
 <div class="custom-media-layout" style="display: flex; gap: 10px;">
-  <div
-    class="vertical-thumbnails"
-  >
+  <div class="vertical-thumbnails">
     {% for media in sorted_media offset: 1 limit: 3 %}
       <div
         class="thumbnail-item"
-        style="
-          border: 1px solid #eee; border-radius:
-          4px; overflow: hidden;
-        "
+        style="border: 1px solid #eee; overflow: hidden;"
         on:click="#zoom-dialog-{{ block.id }}/open/{{ forloop.index }}"
       >
         {%- render 'product-media', media: media, sizes: '100px', is_main_product_media: false -%}
@@ -719,7 +714,7 @@
   }
 
   .thumbnail-item:hover {
-    outline: 2px solid gray;
+    outline: 2px solid black;
   }
 
   .vertical-thumbnails {

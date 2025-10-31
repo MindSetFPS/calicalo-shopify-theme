@@ -8,11 +8,13 @@
   {% render 'search', style: 'default', class: 'custom-class' %}
 {%- enddoc -%}
 
+{% comment %} search-action {% endcomment %}
+
 {% unless style == 'none' %}
-  <search-button class="search-action{% if class != blank %} {{ class | strip }}{% endif %}">
+  <search-button class="calicalo-ignore-hover {% if class != blank %} {{ class | strip }}{% endif %} calicalo_search_button ">
     <button
       on:click="#search-modal/showDialog"
-      class="button button-unstyled search-modal__button header-actions__action"
+      class="button calicalo-ignore-hover button-unstyled search-modal__button calicalo-search-modal_button header-actions__action calicalo-search"
       aria-label="{{ 'accessibility.open_search_modal' | t }}"
     >
       <span
@@ -21,11 +23,43 @@
       >
         {{ 'icon-search.svg' | inline_asset_content }}
       </span>
+      <span class="calicalo-text"> Buscar productos </span>
     </button>
   </search-button>
 {% endunless %}
 
 {% stylesheet %}
+  .calicalo-text {
+    display: none;
+  }
+
+  @media (min-width: 750px) {
+    .calicalo-search {
+      border-radius: var(--style-border-radius-inputs);
+      border: var(--style-border-width-inputs) solid var(--color-input-border);
+      background-color: white;
+      color: black;
+      width: 100%;
+    }
+
+    .calicalo-text {
+      display: inline !important;
+    }
+
+    .calicalo:hover {
+      background-color: var(--color-input-hover-background);
+      transition: all;
+    }
+
+    .calicalo_search_button {
+      width: 100%;
+    }
+
+    .calicalo-search-modal_button {
+      justify-content: start;
+    }
+  }
+
   .search-action {
     --search-border-radius: var(--style-border-radius-inputs);
     --search-border-width: var(--style-border-width-inputs);

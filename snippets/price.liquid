@@ -76,4 +76,9 @@
     -%}
     {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
   {%- endif -%}
+
+  {% if selected_variant.compare_at_price > selected_variant.price %}
+    {% render 'discount-percentage' %}
+    {% render 'discount' %}
+  {% endif %}
 </div>

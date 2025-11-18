@@ -1,3 +1,14 @@
+{%- style -%}
+  .product-information {
+    --sidebar-width: 100%;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .product-information {
+      --sidebar-width: {{ section.settings.sidebar_width }}%;
+    }
+  }
+{%- endstyle -%}
+
 {% liquid
   if section.settings.desktop_media_position == 'left'
     assign render_order = 'media,product-details'
@@ -58,6 +69,7 @@
       <div
         class="product-information__media"
         data-testid="product-information-media"
+        style="justify-content: {{ section.settings.media_justify_content }}; display: flex;"
       >
         {%- content_for 'block',
           type: '_product-media-gallery',
@@ -351,6 +363,48 @@
       "step": 4,
       "unit": "px",
       "default": 16
+    },
+    {
+      "type": "range",
+      "id": "sidebar_width",
+      "label": "Sidebar width",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 75
+    },
+    {
+      "type": "select",
+      "id": "media_justify_content",
+      "label": "Media justify content",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        },
+        {
+          "value": "space-between",
+          "label": "Space Between"
+        },
+        {
+          "value": "space-around",
+          "label": "Space Around"
+        },
+        {
+          "value": "space-evenly",
+          "label": "Space Evenly"
+        }
+      ],
+      "default": "flex-end"
     },
     {
       "type": "color_scheme",

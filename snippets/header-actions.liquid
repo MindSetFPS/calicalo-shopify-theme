@@ -7,6 +7,14 @@
 <header-actions
   {{- block.shopify_attributes -}}
 >
+  {% assign menu = linklists.pedidos %}
+
+  {% for link in menu.links %}
+    <a class="header-actions__action custom_button_pedidos calicalo-margin-left" href="{{ link.url }}">
+      {{ link.title }}
+    </a>
+  {% endfor %}
+
   {% if shop.customer_accounts_enabled %}
     {% render 'account-popover' %}
     {% render 'account-drawer' %}
@@ -26,6 +34,11 @@
 </header-actions>
 
 {% stylesheet %}
+  .custom_button_pedidos {
+    align-items: center;
+    margin-left: 12px;
+  }
+
   .cart-drawer {
     --cart-drawer-padding: var(--padding-lg) var(--padding-xl);
     --cart-drawer-padding-desktop: var(--padding-xl) var(--padding-2xl);

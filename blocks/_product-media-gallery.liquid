@@ -274,8 +274,15 @@
 
 <div
   class="custom-media-layout"
-  style="display: flex; gap: 10px; justify-content: {{ block.settings.custom_media_layout_justify_content }};"
+  style="display: flex; gap: 10px; width: 100%;"
 >
+  <style>
+    @media screen and (min-width: 750px) {
+      .custom-media-layout {
+        width: {{ block.settings.custom_media_layout_width }}% !important;
+      }
+    }
+  </style>
   <div class="vertical-thumbnails">
     {% for media in sorted_media offset: 1 limit: 3 %}
       <div
@@ -747,16 +754,6 @@
       width: 100%;
     }
   }
-
-  .custom-media-layout {
-    width: 100%;
-  }
-
-  @media screen and (min-width: 750px) {
-    .custom-media-layout {
-      width: {{ block.settings.custom_media_layout_width }}px;
-    }
-  }
 {% endstylesheet %}
 
 {% schema %}
@@ -991,39 +988,11 @@
       "type": "range",
       "id": "custom_media_layout_width",
       "label": "Custom Media Layout Width",
-      "min": 100,
-      "max": 1000,
-      "step": 10,
-      "unit": "px",
-      "default": 500
-    },
-    {
-      "type": "select",
-      "id": "custom_media_layout_justify_content",
-      "label": "Justify Content",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "Left"
-        },
-        {
-          "value": "flex-end",
-          "label": "Right"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "space-between",
-          "label": "Space Between"
-        },
-        {
-          "value": "space-around",
-          "label": "Space Around"
-        }
-      ],
-      "default": "flex-start"
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
     },
     {
       "type": "checkbox",
